@@ -1,7 +1,7 @@
--- 维度表保持不变：只建这一张
+-- dim_datetime
 CREATE TABLE IF NOT EXISTS dim_datetime (
-    datetime_id VARCHAR(20) PRIMARY KEY, -- 如 '2023010112'
-    timestamp_value TIMESTAMP,           -- 具体时间戳
+    datetime_id VARCHAR(20) PRIMARY KEY,
+    timestamp_value TIMESTAMP,
     year INT,
     month INT,
     day INT,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS dim_datetime (
     is_weekend BOOLEAN
 );
 
--- 2. 维度表：地点 (Borough, Zone)
+-- dim_location
 CREATE TABLE IF NOT EXISTS dim_location (
     location_id INT PRIMARY KEY,
     borough VARCHAR(50),
@@ -18,26 +18,24 @@ CREATE TABLE IF NOT EXISTS dim_location (
     service_zone VARCHAR(50)
 );
 
--- 3. 维度表：费率代码
+-- dim_rate_code
 CREATE TABLE IF NOT EXISTS dim_rate_code (
     rate_code_id INT PRIMARY KEY,
     description VARCHAR(50)
 );
 
--- 4. 维度表：支付方式
+-- dim_payment_type
 CREATE TABLE IF NOT EXISTS dim_payment_type (
     payment_type_id INT PRIMARY KEY,
     description VARCHAR(50)
 );
 
--- (其他维度表 dim_location, dim_rate_code 等保持不变...)
 
--- 事实表：同时引用两次 dim_datetime
+-- fact_trips
 CREATE TABLE IF NOT EXISTS fact_trips (
     trip_id SERIAL PRIMARY KEY,
     vendor_id INT,
     
-    -- 【关键修改在这里】建立了两个字段，都指向同一张 dim_datetime 表
     pickup_datetime_id VARCHAR(20) REFERENCES dim_datetime(datetime_id),
     dropoff_datetime_id VARCHAR(20) REFERENCES dim_datetime(datetime_id),
     
@@ -46,7 +44,6 @@ CREATE TABLE IF NOT EXISTS fact_trips (
     rate_code_id INT REFERENCES dim_rate_code(rate_code_id),
     payment_type_id INT REFERENCES dim_payment_type(payment_type_id),
     
-    -- 各种指标
     passenger_count INT,
     trip_distance FLOAT,
     fare_amount FLOAT,

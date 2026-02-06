@@ -45,7 +45,7 @@ object Main {
 
       // Execute streaming
       val in = new BufferedInputStream(new URL(fileUrl).openStream())
-      val out = fs.create(destPath, true) // true = overwrite
+      val out = fs.create(destPath, true)
 
       val buffer = new Array[Byte](8192)
       var bytesRead = 0
