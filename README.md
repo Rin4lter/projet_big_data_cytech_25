@@ -1,5 +1,7 @@
 **Sujet :** NYC TLC Trip Record Data
+
 **Professeur référent :** Rakib SHEIKH
+
 **Membres de groupe :** REN Yanhao, ZHOU Kunyao
 
 ## EX1
@@ -79,5 +81,7 @@ Lancez `main.py` avec votre IDE préféré.
 ### PEP 8
 
 4 lignes de code dépassent la limite de 79 caractères imposée par la norme PEP 8, mais elles n'ont pas été scindées afin de préserver la lisibilité.
+
+### Résultat
 
 ![image-20260206144610809](./assets/image-20260206144610809-1770385574677-7.png)
