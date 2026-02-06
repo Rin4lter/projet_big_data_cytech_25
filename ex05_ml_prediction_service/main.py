@@ -152,7 +152,7 @@ def train_and_evaluate(X, y):
 
     # Print Prediction Sample Comparison:
     comparison = pd.DataFrame({'Actual': y_test, 'Predicted': predictions}).head(5)
-    print("\nPrediction Sample Comparison::\n", comparison)
+    print("\nPrediction Sample Comparison:\n", comparison)
 
 
 if __name__ == "__main__":

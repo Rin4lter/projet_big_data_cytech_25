@@ -41,7 +41,7 @@ Pour exécuter ce programme, vous devez avoir **Python 3.12** (Les autres versio
 Ouvrez votre terminal (PowerShell ou CMD) et installez les bibliothèques Python nécessaires :
 
 ```cmd
-pip install notebook pandas sqlalchemy psycopg2-binary matplotlib seaborn
+uv sync
 ```
 
 ### Usage
@@ -71,7 +71,7 @@ Pour exécuter ce programme, vous devez avoir **Python 3.12** (Les autres versio
 Ouvrez votre terminal (PowerShell ou CMD) et installez les bibliothèques Python nécessaires :
 
 ```cmd
-pip install scikit-learn pandas s3fs pyarrow
+uv sync
 ```
 
 ### Usage
