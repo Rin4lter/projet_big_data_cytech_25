@@ -1,28 +1,83 @@
-Le code minimal pour faire fonctionner un code avec Minio :
-```scala
-import org.apache.spark.sql.{SparkSession, DataFrame}
+**Sujet :** NYC TLC Trip Record Data
+**Professeur référent :** Rakib SHEIKH
+**Membres de groupe :** REN Yanhao, ZHOU Kunyao
 
-object SparkApp extends App {
-  val spark = SparkSession.builder()
-    .appName("SparkApp")
-    .master("local")
-    .config("fs.s3a.access.key", "minio")
-    .config("fs.s3a.secret.key", "minio123")
-    .config("fs.s3a.endpoint", "http://localhost:9000/") // A changer lors du déploiement
-    .config("fs.s3a.path.style.access", "true")
-    .config("fs.s3a.connection.ssl.enable", "false")
-    .config("fs.s3a.attempts.maximum", "1")
-    .config("fs.s3a.connection.establish.timeout", "6000")
-    .config("fs.s3a.connection.timeout", "5000")
-    .getOrCreate()
-  spark.sparkContext.setLogLevel("WARN")
+## EX1
 
-}
+### Prérequis
+
+Pour exécuter ce programme, vous devez avoir **JDK 17** (Les autres versions peuvent fonctionner, mais sans test).
+
+Construisez les dépendances selon `build.sbt`
+
+Il faut ajouter code `--add-exports java.base/sun.nio.ch=ALL-UNNAMED` dans le VM Option
+
+## EX2
+
+### Prérequis
+
+Pour exécuter ce programme, vous devez avoir **JDK 17** (Les autres versions peuvent fonctionner, mais sans test).`
+
+Construisez les dépendances selon `build.sbt`
+
+Il faut ajouter code `--add-exports java.base/sun.nio.ch=ALL-UNNAMED` dans le VM Option
+
+## EX3
+
+Nous avons opté pour le **modèle en étoile**, parce que :
+
+1. **Performance des requêtes** : En tant que modèle dénormalisé, le schéma en étoile nécessite moins de jointures (JOINS) que le modèle en flocon. Dans un contexte Big Data (OLAP), réduire le nombre de jointures améliore considérablement la vitesse des agrégations et de la génération de rapports.
+2. **Simplicité et lisibilité** : La structure, composée d'une table de faits centrale connectée directement aux tables de dimensions, est intuitive. Cette simplicité réduit la complexité d'écriture des requêtes SQL et facilite la compréhension des relations de données par les équipes métier.
+3. **Adaptabilité aux données** : Les dimensions du projet (modes de paiement, vendeurs, codes tarifs) possèdent des hiérarchies simples et un faible volume de données. Il n'est donc pas nécessaire d'appliquer la normalisation stricte d'un modèle en flocon pour économiser de l'espace disque. Le modèle en étoile offre ainsi le meilleur équilibre entre performance et facilité d'utilisation.
+
+## EX4
+
+### Prérequis
+
+Pour exécuter ce programme, vous devez avoir **Python 3.12** (Les autres versions peuvent fonctionner, mais sans test).
+
+Ouvrez votre terminal (PowerShell ou CMD) et installez les bibliothèques Python nécessaires :
+
+```cmd
+pip install notebook pandas sqlalchemy psycopg2-binary matplotlib seaborn
 ```
 
-## Modalités de rendu
+### Usage
 
-1. Pull Request vers la branch `master`
-2. Dépot du rapport et du code source zippé dans cours.cyu.fr (Les accès seront bientôt ouverts)
+Lancez `dashboard.ipynb` avec votre IDE préféré.
 
-Date limite de rendu : 7 février 2026
+### Screenshot
+
+<img src="./assets/image-20260206140621163.png" alt="image-20260206140621163"  />
+
+<img src="./assets/image-20260206140638371.png" alt="image-20260206140638371"  />
+
+![image-20260206140831463](./assets/image-20260206140831463.png)
+
+![image-20260206140657710](./assets/image-20260206140657710.png)
+
+![image-20260206140705066](./assets/image-20260206140705066.png)
+
+![image-20260206140848011](./assets/image-20260206140848011.png)
+
+## EX5
+
+### Prérequis
+
+Pour exécuter ce programme, vous devez avoir **Python 3.12** (Les autres versions peuvent fonctionner, mais sans test).
+
+Ouvrez votre terminal (PowerShell ou CMD) et installez les bibliothèques Python nécessaires :
+
+```cmd
+pip install scikit-learn pandas s3fs pyarrow
+```
+
+### Usage
+
+Lancez `main.py` avec votre IDE préféré.
+
+### PEP 8
+
+4 lignes de code dépassent la limite de 79 caractères imposée par la norme PEP 8, mais elles n'ont pas été scindées afin de préserver la lisibilité.
+
+![image-20260206144610809](./assets/image-20260206144610809-1770385574677-7.png)

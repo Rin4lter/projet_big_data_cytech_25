@@ -57,3 +57,5 @@ minio-data
 hadoop
 
 /data
+
+.venv
